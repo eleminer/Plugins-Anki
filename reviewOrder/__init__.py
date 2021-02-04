@@ -1,8 +1,8 @@
 import aqt
 import anki
 import aqt.deckconf
-import PyQt4.QtCore
-import PyQt4.QtGui
+import PyQt5.QtCore
+import PyQt5.QtGui
 import random
 
 def my_fillRev(self):
