@@ -10,7 +10,7 @@ def flipCard():
 
 
 def keyHandler(self, evt, _old):
-    key = unicode(evt.text())
+    key = str(evt.text())
     if key == "0":
         flipCard()
     else:
