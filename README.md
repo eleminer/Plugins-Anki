@@ -1,4 +1,4 @@
-# Cram-Plugin-Anki
+# Plugins-Anki
 
 Plugin für Christian Braun
 
