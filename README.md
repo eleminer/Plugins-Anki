@@ -8,3 +8,6 @@ Counter: Test Plugin: fügt einen Kartenzähler im Unterordner "Tools" hinzu.
 
 
 ![](Screenshot.png)
+## INstallation
+1. Ordner mit Inhalt nach addon21 kopieren!
+2. Anki neu starten.
