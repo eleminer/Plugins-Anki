@@ -35,6 +35,7 @@ def cram():
     # show a message box
     showInfo(str(count) + " cards removed")
     mw.reset()
+    
 
 # create a new menu item
 action = QAction("Cram - Rebuild without known cards of last session", mw)
