@@ -13,6 +13,9 @@
 
 ![](Screenshot1.png)
 
+### FlipCard
+Mithilfe der Tasatur eine Karte umdrehen auf Knopfdruck.
+
 ## Installation
 1. Ordner mit Inhalt nach addon21 kopieren!
 2. Anki neu starten.
