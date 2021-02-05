@@ -24,9 +24,12 @@ def cram():
         nested = list(reversed(out))
         flat = [i for sublist in nested for i in sublist]
         # remove card from current deck if the last two answers were correct
-        if ((flat[0]==2) and (flat[1]==2)):
-            listOfAnsweredCards.append(cid)
-            count += 1
+        try:
+            if ((flat[0]==2) and (flat[1]==2)):
+                listOfAnsweredCards.append(cid)
+                count += 1
+        except:
+            pass
 
     mw.col.sched.remFromDyn(listOfAnsweredCards)
     # show a message box
