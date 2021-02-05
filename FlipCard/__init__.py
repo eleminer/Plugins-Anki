@@ -17,5 +17,4 @@ def keyHandler(self, evt, _old):
         return _old(self, evt)
 
 
-aqt.reviewer.Reviewer._keyHandler = anki.hooks.wrap(
-    aqt.reviewer.Reviewer._keyHandler, keyHandler, "around")
+aqt.reviewer.Reviewer._keyHandler = anki.hooks.wrap(aqt.reviewer.Reviewer._keyHandler, keyHandler, "around")

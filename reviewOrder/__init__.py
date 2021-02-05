@@ -1,8 +1,10 @@
 import aqt
 import anki
 import aqt.deckconf
-import PyQt5.QtCore
-import PyQt5.QtGui
+import PyQt5
+from PyQt5 import QtCore, QtGui 
+from PyQt5 import QtWidgets
+#import PyQt5.QtGui
 import random
 
 def my_fillRev(self):
@@ -101,10 +103,13 @@ def myLoadConf(self):
 
 
 def mySetupCombos(self):
-    self.form.myLabel = PyQt4.QtGui.QLabel("Order")
-    self.form.myComboBox = PyQt4.QtGui.QComboBox()
+    self.form.myLabel = PyQt5.QtWidgets.QLabel("Order")
+    self.form.myComboBox = PyQt5.QtWidgets.QComboBox()
     self.form.myComboBox.addItems(["Show review cards in random order",
                                    "Show review cards in order added"])
+
+   #self.form.myComboBox.currentIndexChanged.connect(self.indexChanged)
+    
     self.connect(self.form.myComboBox, aqt.qt.SIGNAL("currentIndexChanged(int)"),
                  self.indexChanged)
     self.form.myLabel.show()
