@@ -108,7 +108,7 @@ def mySetupCombos(self):
     self.form.myComboBox.addItems(["Show review cards in random order",
                                    "Show review cards in order added"])
 
-   self.form.myComboBox.currentIndexChanged.connect(self.indexChanged) #error in this line; stackoverflow
+    self.form.myComboBox.currentIndexChanged.connect(self.indexChanged) #error in this line; stackoverflow
     
     #self.connect(self.form.myComboBox, aqt.qt.SIGNAL("currentIndexChanged(int)"),
     #             self.indexChanged)
