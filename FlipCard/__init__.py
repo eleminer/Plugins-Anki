@@ -1,20 +1,19 @@
 import aqt
 import anki
+from anki.hooks import addHook
 
 
 def flipCard():
     if aqt.mw.reviewer.state == "question":
-        aqt.mw.reviewer._showAnswerHack()
+        if aqt.mw.reviewer.typedAnswer is None:
+            aqt.mw.reviewer.typedAnswer = ""
+        aqt.mw.reviewer._showAnswer()
     elif aqt.mw.reviewer.state == "answer":
         aqt.mw.reviewer._showQuestion()
 
 
-def keyHandler(self, evt, _old):
-    key = str(evt.text()) #key = unicode(evt.text())
-    if key == "0":
-        flipCard()
-    else:
-        return _old(self, evt)
+ def keyHandler(shortcuts):
+    additions = (("c", flipCard),("Ctrl+;", flipCard))
+    shortcuts += additions
 
 
-aqt.reviewer.Reviewer._keyHandler = anki.hooks.wrap(aqt.reviewer.Reviewer._keyHandler, keyHandler, "around")
