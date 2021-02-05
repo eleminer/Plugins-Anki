@@ -6,6 +6,14 @@ from PyQt5 import QtCore, QtGui
 from PyQt5 import QtWidgets
 #import PyQt5.QtGui
 import random
+# import the main window object (mw) from aqt
+from aqt import mw
+# import the "show info" tool from utils.py
+from aqt.utils import showInfo
+# import all of the Qt GUI library
+from aqt.qt import *
+global stat
+stat=0
 
 def my_fillRev(self):
     deckConf = self.col.decks.confForDid(self.col.decks.current()["id"])
@@ -82,8 +90,10 @@ did = ? and queue = 2 and due <= ? limit ?""",
 
 def indexChanged(self, i):
     # 0 = random, 1 = order added
+    i=i-1
     self.reviewOrder = i
-
+    global stat
+    stat=i
 
 def myOnRestore(self):
     self.form.myComboBox.setCurrentIndex(0)
@@ -105,7 +115,8 @@ def myLoadConf(self):
 def mySetupCombos(self):
     self.form.myLabel = PyQt5.QtWidgets.QLabel("Order")
     self.form.myComboBox = PyQt5.QtWidgets.QComboBox()
-    self.form.myComboBox.addItems(["Show review cards in random order",
+    self.form.myComboBox.addItems(["Please choose:",
+                                   "Show review cards in random order",
                                    "Show review cards in order added"])
 
     self.form.myComboBox.currentIndexChanged.connect(self.indexChanged)
@@ -116,6 +127,16 @@ def mySetupCombos(self):
     self.form.gridLayout_3.addWidget(self.form.myLabel, 7, 0, 1, 3)
     self.form.gridLayout_3.addWidget(self.form.myComboBox, 7, 1, 1, 3)
 
+def testFunction(self):
+    global stat
+    if stat==0:
+        statusstring="random order"
+    elif stat==1:
+        statusstring="order added"
+    else:
+        statusstring="unknown"
+
+    showInfo("Status: %s" % statusstring)
 
 
 anki.sched.Scheduler._fillRev = my_fillRev
@@ -132,3 +153,7 @@ aqt.deckconf.DeckConf.loadConf = anki.hooks.wrap(
     aqt.deckconf.DeckConf.loadConf,
     myLoadConf)
 aqt.deckconf.DeckConf.indexChanged = indexChanged
+
+action = QAction("ReviewStat", mw)
+action.triggered.connect(testFunction)
+mw.form.menuTools.addAction(action)
