@@ -21,7 +21,9 @@ Cram Plugin                |  ReviewOrder Plugin
 ## Usage
 **1. Cram:**
   A new status bar button popup (see the screenshot above)
+	
 **2. FlipCard Plugin:**
   Use the button "0" on the numpad for example to toogle the card
+	
 **3. reviewOrder:**
   In the option task (under reviews) popup a new dropdown menu, where you can change the order of the cards during a review.
