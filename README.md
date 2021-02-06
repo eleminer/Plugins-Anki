@@ -1,21 +1,18 @@
 # Plugins-Anki
+This repository contains plugins for Anki [Anki official website](https://apps.ankiweb.net/)
 
-1. Counter: Test Plugin: fügt einen Kartenzähler im Unterordner "Tools" hinzu.
-2. Cram Plugin
-3. FlipCard
-4. reviewOrder
+## Overview of the plugins
+1. counterCard: counts all cards
+1. Cram: Rebuild a deck without known cards 
+1. FlipCard: keyboard shortcut to flip a card
+1. reviewOrder: changes the order of the cards when reviewing
 
-### Cram Plugin:
-
-![](Screenshot.png)
-
-### ReviewOrder Plugin
-
-![](Screenshot1.png)
-
-### FlipCard
-Mithilfe der Tasatur eine Karte umdrehen auf Knopfdruck.
+## screenshots to show functionality
+Cram Plugin                |  ReviewOrder Plugin
+:-------------------------:|:-------------------------:
+<img src="Screenshot.png" width="400">  |  <img src="Screenshot1.png" width="400">
 
 ## Installation
-1. Ordner mit Inhalt nach addon21 kopieren!
-2. Anki neu starten.
+1. Copy each plugin in addon21 folder
+1. restart anki
+1. enjoy the plugins
