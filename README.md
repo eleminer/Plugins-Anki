@@ -14,5 +14,5 @@ Cram Plugin                |  ReviewOrder Plugin
 
 ## Installation
 1. Copy each plugin in addon21 folder
-1. restart anki
+1. restart Anki
 1. enjoy the plugins
