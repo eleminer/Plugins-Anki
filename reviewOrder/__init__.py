@@ -1,14 +1,9 @@
 import aqt
 import anki
 import aqt.deckconf
-import PyQt5
-from PyQt5 import QtCore, QtGui 
-from PyQt5 import QtWidgets
-from PyQt5.QtCore import pyqtSlot
+import PyQt4.QtCore
+import PyQt4.QtGui
 import random
-from aqt import mw
-from aqt.utils import showInfo
-from aqt.qt import *
 
 def my_fillRev(self):
     deckConf = self.col.decks.confForDid(self.col.decks.current()["id"])
@@ -87,6 +82,7 @@ def indexChanged(self, i):
     # 0 = random, 1 = order added
     self.reviewOrder = i
 
+
 def myOnRestore(self):
     self.form.myComboBox.setCurrentIndex(0)
     self.reviewOrder = 0
@@ -105,18 +101,17 @@ def myLoadConf(self):
 
 
 def mySetupCombos(self):
-    self.form.myLabel = PyQt5.QtWidgets.QLabel("Order")
-    self.form.myComboBox = PyQt5.QtWidgets.QComboBox()
+    self.form.myLabel = PyQt4.QtGui.QLabel("Order")
+    self.form.myComboBox = PyQt4.QtGui.QComboBox()
     self.form.myComboBox.addItems(["Show review cards in random order",
                                    "Show review cards in order added"])
-                                   
-    self.form.myComboBox.currentIndexChanged(int).connect(self.indexChanged)
-    
-    #self.connect(self.form.myComboBox, aqt.qt.SIGNAL("currentIndexChanged(int)"),
-     #            self.indexChanged)
+    self.connect(self.form.myComboBox, aqt.qt.SIGNAL("currentIndexChanged(int)"),
+                 self.indexChanged)
     self.form.myLabel.show()
     self.form.gridLayout_3.addWidget(self.form.myLabel, 7, 0, 1, 3)
     self.form.gridLayout_3.addWidget(self.form.myComboBox, 7, 1, 1, 3)
+
+
 
 anki.sched.Scheduler._fillRev = my_fillRev
 aqt.deckconf.DeckConf.setupCombos = anki.hooks.wrap(
