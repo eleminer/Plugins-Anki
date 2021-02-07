@@ -127,3 +127,4 @@ aqt.deckconf.DeckConf.loadConf = anki.hooks.wrap(
     aqt.deckconf.DeckConf.loadConf,
     myLoadConf)
 aqt.deckconf.DeckConf.indexChanged = indexChanged
+#
