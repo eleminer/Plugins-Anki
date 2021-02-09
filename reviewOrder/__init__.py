@@ -1,14 +1,22 @@
-import aqt
-import anki
-import aqt.deckconf
-import PyQt4.QtCore
-import PyQt4.QtGui
 import random
+# import sys
+import anki
+import aqt
+import aqt.qt
+import aqt.deckconf
+
+import PyQt5
+import PyQt5.QtCore
+import PyQt5.QtGui
+import PyQt5.QtWidgets
+from PyQt5.QtCore import QObject, pyqtSignal
+# from PyQt5.QtWidgets import QWidget, QApplication, QPushButton
+
 
 def my_fillRev(self):
     deckConf = self.col.decks.confForDid(self.col.decks.current()["id"])
     reviewOrder = deckConf.get("reviewOrder", 0)
-    #print "reviewOrder", reviewOrder
+    # print "reviewOrder", reviewOrder
     if reviewOrder == 1:
         # modified to sort cards
         if self._revQueue:
@@ -77,7 +85,6 @@ did = ? and queue = 2 and due <= ? limit ?""",
             return self._fillRev()
 
 
-
 def indexChanged(self, i):
     # 0 = random, 1 = order added
     self.reviewOrder = i
@@ -101,16 +108,18 @@ def myLoadConf(self):
 
 
 def mySetupCombos(self):
-    self.form.myLabel = PyQt4.QtGui.QLabel("Order")
-    self.form.myComboBox = PyQt4.QtGui.QComboBox()
+    self.form.myLabel = PyQt5.QtWidgets.QLabel("Order")
+    self.form.myComboBox = PyQt5.QtWidgets.QComboBox()
     self.form.myComboBox.addItems(["Show review cards in random order",
                                    "Show review cards in order added"])
-    self.connect(self.form.myComboBox, aqt.qt.SIGNAL("currentIndexChanged(int)"),
-                 self.indexChanged)
+
+    #self.form.myComboBox.currentIndexChanged.connect(self.indexChanged)
+    self.form.myComboBox.currentIndexChanged[int].connect(self.indexChanged)
+    #self.form.myComboBox.currentIndexChanged(int).connect(self.indexChanged)
+
     self.form.myLabel.show()
     self.form.gridLayout_3.addWidget(self.form.myLabel, 7, 0, 1, 3)
     self.form.gridLayout_3.addWidget(self.form.myComboBox, 7, 1, 1, 3)
-
 
 
 anki.sched.Scheduler._fillRev = my_fillRev
@@ -127,3 +136,11 @@ aqt.deckconf.DeckConf.loadConf = anki.hooks.wrap(
     aqt.deckconf.DeckConf.loadConf,
     myLoadConf)
 aqt.deckconf.DeckConf.indexChanged = indexChanged
+
+
+# if __name__ == "__main__":
+#     app = QApplication(sys.argv)
+#     window = my_fillRev("col 1")
+#     window.show()
+#
+#     sys.exit(app.exec_())
