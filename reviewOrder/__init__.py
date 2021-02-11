@@ -4,10 +4,13 @@ import aqt.deckconf
 import random
 from aqt.qt import *
 from aqt.qt import debug
+from aqt import mw
 import sys
 
-config = dict(reviewOrder=1)
-
+#config = dict(reviewOrder=1)
+config = mw.addonManager.getConfig(__name__)
+#config= mw.addonManager.getConfig(__name__, config)
+#=config['reviewOrder']
 
 def my_fillRev(self):
     reviewOrder =  config['reviewOrder']
@@ -88,14 +91,29 @@ def indexChanged(self, i):
 def myOnRestore(self):
     self.form.myComboBox.setCurrentIndex(0)
     confic['reviewOrder'] = 0
+    #self.reviewOrder = 0
 
 def mySaveConf(self):
+    #config['reviewOrder']=config
+    #mw.addonManager.writeConfig(__name__, config)
+    #config['reviewOrder']= config
+    #mw.addonManager.writeConfig(__name__, config)
+    #config['reviewOrder'] = self.reviewOrder
+    #self.conf['reviewOrder'] = self.reviewOrder
+    #config['reviewOrder'] = config
+    #mw.addonManager.writeConfig(__name__, config)
     config['reviewOrder'] = self.reviewOrder
+    mw.addonManager.writeConfig(__name__, config)
 
 
 def myLoadConf(self):
     self.reviewOrder = config['reviewOrder']
     self.form.myComboBox.setCurrentIndex(self.reviewOrder)
+    #if "reviewOrder" in self.conf:
+        #self.reviewOrder = self.conf["reviewOrder"]
+    #else:
+        #self.reviewOrder = 0
+    #self.form.myComboBox.setCurrentIndex(self.reviewOrder)
 
 
 def mySetupCombos(self):
