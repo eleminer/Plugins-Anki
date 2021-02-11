@@ -1,13 +1,16 @@
 import aqt
 import anki
 import aqt.deckconf
-import PyQt4.QtCore
-import PyQt4.QtGui
 import random
+from aqt.qt import *
+from aqt.qt import debug
+import sys
+
+config = dict(reviewOrder=0)
+
 
 def my_fillRev(self):
-    deckConf = self.col.decks.confForDid(self.col.decks.current()["id"])
-    reviewOrder = deckConf.get("reviewOrder", 0)
+    reviewOrder =  config['reviewOrder']
     #print "reviewOrder", reviewOrder
     if reviewOrder == 1:
         # modified to sort cards
@@ -79,34 +82,29 @@ did = ? and queue = 2 and due <= ? limit ?""",
 
 
 def indexChanged(self, i):
-    # 0 = random, 1 = order added
+    config['reviewOrder'] = i
     self.reviewOrder = i
-
 
 def myOnRestore(self):
     self.form.myComboBox.setCurrentIndex(0)
-    self.reviewOrder = 0
-
+    confic['reviewOrder'] = 0
 
 def mySaveConf(self):
-    self.conf['reviewOrder'] = self.reviewOrder
+    config['reviewOrder'] = self.reviewOrder
 
 
 def myLoadConf(self):
-    if "reviewOrder" in self.conf:
-        self.reviewOrder = self.conf["reviewOrder"]
-    else:
-        self.reviewOrder = 0
+    self.reviewOrder = config['reviewOrder']
     self.form.myComboBox.setCurrentIndex(self.reviewOrder)
 
 
 def mySetupCombos(self):
-    self.form.myLabel = PyQt4.QtGui.QLabel("Order")
-    self.form.myComboBox = PyQt4.QtGui.QComboBox()
+    self.form.myLabel = QLabel("Order")
+    self.form.myComboBox = QComboBox()
     self.form.myComboBox.addItems(["Show review cards in random order",
                                    "Show review cards in order added"])
-    self.connect(self.form.myComboBox, aqt.qt.SIGNAL("currentIndexChanged(int)"),
-                 self.indexChanged)
+    self.form.myComboBox.currentIndexChanged.connect(
+        lambda entry_id: self.indexChanged(entry_id))
     self.form.myLabel.show()
     self.form.gridLayout_3.addWidget(self.form.myLabel, 7, 0, 1, 3)
     self.form.gridLayout_3.addWidget(self.form.myComboBox, 7, 1, 1, 3)
