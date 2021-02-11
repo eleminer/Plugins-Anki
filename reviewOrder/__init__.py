@@ -6,7 +6,7 @@ from aqt.qt import *
 from aqt.qt import debug
 import sys
 
-config = dict(reviewOrder=0)
+config = dict(reviewOrder=1)
 
 
 def my_fillRev(self):
